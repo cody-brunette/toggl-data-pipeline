@@ -104,7 +104,7 @@ def ingest_toggl_data(req: func.HttpRequest) -> func.HttpResponse:
                     details.get('start'),             # start_time
                     details.get('stop'),              # stop_time
                     details.get('seconds'),           # duration_seconds
-                    details.get('at')                 # updated_at_tz
+                    details.get('at')                 # updated_at
                 )
                 rows_to_insert.append(row)
 
@@ -113,7 +113,7 @@ def ingest_toggl_data(req: func.HttpRequest) -> func.HttpResponse:
                 sql_insert = """
                     INSERT INTO [dbo].[StageTogglTimeEntries] (
                         toggl_time_entry_id, user_id, project_id, task_id, billable,
-                        description, start_time, stop_time, duration_seconds, updated_at_tz
+                        description, start_time, stop_time, duration_seconds, updated_at
                     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """
                 #cursor.fast_executemany = True
